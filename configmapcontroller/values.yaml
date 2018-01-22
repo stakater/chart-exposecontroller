@@ -1,0 +1,7 @@
+exposeController:
+  namespace: tools
+  domain: stackator.com
+  image:
+    name: fabric8/exposecontroller
+    tag: "2.3.28"
+    pullPolicy: IfNotPresent
