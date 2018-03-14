@@ -4,7 +4,7 @@
 String chartPackageName = ""
 String chartName = "exposecontroller"
 
-toolsNode(toolsImage: 'stakater/pipeline-tools:deve') {
+toolsNode(toolsImage: 'stakater/pipeline-tools:1.2.0') {
     container(name: 'tools') {
         def helm = new io.stakater.charts.Helm()
         def common = new io.stakater.Common()
