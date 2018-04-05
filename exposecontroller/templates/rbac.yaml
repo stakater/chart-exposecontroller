@@ -1,22 +1,23 @@
-# one Role gives access to services & ingresses in the same namespace as the exposecontroller is running
+# one Role gives access to services, ingresses & configmaps in the same namespace as the exposecontroller is running
 # other Role gives access to the services in the default namespace
 
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ template "name" . }}-ns-fabric8
+  name: {{ template "name" . }}-ns-{{ .Values.exposeController.namespace }}
   namespace: {{ .Values.exposeController.namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
 metadata:
-  name: {{ template "name" . }}-fabric8-role
+  name: {{ template "name" . }}-{{ .Values.exposeController.namespace }}-role
   namespace: {{ .Values.exposeController.namespace }}
 rules:
   - apiGroups:
       - ""
     resources:
       - services
+      - configmaps
     verbs:
       - list
       - get
@@ -36,19 +37,29 @@ rules:
       - patch
       - delete
       - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - get
+      - list
+      - watch
+      - patch
+      - update
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
-  name: {{ template "name" . }}-fabric8-role-binding
-  namespace: tools
+  name: {{ template "name" . }}-{{ .Values.exposeController.namespace }}-role-binding
+  namespace: {{ .Values.exposeController.namespace }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ template "name" . }}-fabric8-role
+  name: {{ template "name" . }}-{{ .Values.exposeController.namespace }}-role
 subjects:
   - kind: ServiceAccount
-    name: {{ template "name" . }}-ns-fabric8
+    name: {{ template "name" . }}-ns-{{ .Values.exposeController.namespace }}
     namespace: {{ .Values.exposeController.namespace }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -77,5 +88,5 @@ roleRef:
   name: {{ template "name" . }}-default-role
 subjects:
   - kind: ServiceAccount
-    name: {{ template "name" . }}-ns-fabric8
+    name: {{ template "name" . }}-ns-{{ .Values.exposeController.namespace }}
     namespace: {{ .Values.exposeController.namespace }}
