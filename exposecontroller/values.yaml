@@ -2,6 +2,6 @@ exposeController:
   namespace: tools
   domain: stackator.com
   image:
-    name: fabric8/exposecontroller
-    tag: "2.3.28"
+    name: jenkinsxio/exposecontroller
+    tag: "2.3.56"
     pullPolicy: IfNotPresent
