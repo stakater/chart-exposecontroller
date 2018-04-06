@@ -46,7 +46,7 @@ spec:
         volumeMounts:
         - mountPath: /etc/exposecontroller
           name: config-volume
-      serviceAccountName: {{template "name" . }}-ns-fabric8
+      serviceAccountName: {{ template "name" . }}-ns-{{ .Values.exposeController.namespace }}
       volumes:
       - configMap:
           name: {{ template "name" . }}
