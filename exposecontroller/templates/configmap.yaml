@@ -1,13 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  annotations:
-    fabric8.io/target-platform: kubernetes
   labels:
-    app: {{ template "name" . }}
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-    release: {{ .Release.Name | quote }}
-    heritage: {{ .Release.Service | quote }}
+{{ include "labels.stakater" . | indent 4 }}
+{{ include "labels.chart" . | indent 4 }}
   name: {{ template "name" . }}
 data:
   config.yml: |

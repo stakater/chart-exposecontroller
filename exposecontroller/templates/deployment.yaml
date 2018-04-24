@@ -4,29 +4,21 @@ metadata:
   annotations:
     configmap.fabric8.io/update-on-change: {{ template "name" . }}
   labels:
-    app: {{ template "name" . }}
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-    release: {{ .Release.Name | quote }}
-    heritage: {{ .Release.Service | quote }}
+{{ include "labels.stakater" . | indent 4 }}
+{{ include "labels.chart" . | indent 4 }}
   name: {{ template "name" . }}
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: {{ template "name" . }}
-      chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-      release: {{ .Release.Name | quote }}
-      heritage: {{ .Release.Service | quote }}
+{{ include "labels.selector" . | indent 6 }}
   template:
     metadata:
       annotations:
         configmap.fabric8.io/update-on-change: {{ template "name" . }}
       labels:
-        app: {{ template "name" . }}
-        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
-        release: {{ .Release.Name | quote }}
-        heritage: {{ .Release.Service | quote }}
+{{ include "labels.selector" . | indent 8 }}
     spec:
       containers:
       - env:
@@ -41,12 +33,12 @@ spec:
             command:
             - cat
             - /tmp/restarteveryday
-          initialDelaySeconds: 86164
+          initialDelaySeconds: {{ .Values.exposeController.probes.liveness.initialDelaySeconds }}
         name: {{ template "name" . }}
         volumeMounts:
         - mountPath: /etc/exposecontroller
           name: config-volume
-      serviceAccountName: {{ template "name" . }}-ns-{{ .Values.exposeController.namespace }}
+      serviceAccountName: {{ template "name" . }}
       volumes:
       - configMap:
           name: {{ template "name" . }}

@@ -1,6 +1,13 @@
 exposeController:
+  labels:
+    group: com.stakater.platform
+    provider: stakater
+    version: 2.3.56
   namespace: tools
   domain: stackator.com
+  probes:
+    liveness:
+      initialDelaySeconds: 86164
   image:
     name: jenkinsxio/exposecontroller
     tag: "2.3.56"
