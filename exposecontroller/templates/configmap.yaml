@@ -9,3 +9,6 @@ data:
   config.yml: |
     domain: {{ .Values.exposeController.domain }}
     exposer: Ingress
+    {{- if .Values.exposeController.urlTemplate }}
+    urlTemplate: "{{ .Values.exposeController.urlTemplate }}"
+    {{- end }}
