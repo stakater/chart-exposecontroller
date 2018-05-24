@@ -12,3 +12,6 @@ data:
     {{- if .Values.exposeController.urltemplate }}
     urltemplate: "{{ .Values.exposeController.urltemplate }}"
     {{- end }}
+    {{- if .Values.exposeController.http }}
+    http: {{ .Values.exposeController.http }}
+    {{- end }}

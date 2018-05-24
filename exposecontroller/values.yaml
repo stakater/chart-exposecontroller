@@ -5,6 +5,8 @@ exposeController:
     version: 2.3.56
   namespace: tools
   domain: stackator.com
+  # false by default
+#  http: true
   probes:
     liveness:
       initialDelaySeconds: 86164
