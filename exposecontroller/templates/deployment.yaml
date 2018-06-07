@@ -2,23 +2,23 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    configmap.fabric8.io/update-on-change: {{ template "name" . }}
+    configmap.fabric8.io/update-on-change: {{ template "exposecontroller.name" . }}
   labels:
-{{ include "labels.stakater" . | indent 4 }}
-{{ include "labels.chart" . | indent 4 }}
-  name: {{ template "name" . }}
+{{ include "exposecontroller.labels.stakater" . | indent 4 }}
+{{ include "exposecontroller.labels.chart" . | indent 4 }}
+  name: {{ template "exposecontroller.name" . }}
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-{{ include "labels.selector" . | indent 6 }}
+{{ include "exposecontroller.labels.selector" . | indent 6 }}
   template:
     metadata:
       annotations:
-        configmap.fabric8.io/update-on-change: {{ template "name" . }}
+        configmap.fabric8.io/update-on-change: {{ template "exposecontroller.name" . }}
       labels:
-{{ include "labels.selector" . | indent 8 }}
+{{ include "exposecontroller.labels.selector" . | indent 8 }}
     spec:
       containers:
       - env:
@@ -34,12 +34,12 @@ spec:
             - cat
             - /tmp/restarteveryday
           initialDelaySeconds: {{ .Values.exposeController.probes.liveness.initialDelaySeconds }}
-        name: {{ template "name" . }}
+        name: {{ template "exposecontroller.name" . }}
         volumeMounts:
         - mountPath: /etc/exposecontroller
           name: config-volume
-      serviceAccountName: {{ template "name" . }}
+      serviceAccountName: {{ template "exposecontroller.name" . }}
       volumes:
       - configMap:
-          name: {{ template "name" . }}
+          name: {{ template "exposecontroller.name" . }}
         name: config-volume

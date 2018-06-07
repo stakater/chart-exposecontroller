@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
 metadata:
-  name: {{ template "name" . }}-{{ .Values.exposeController.namespace }}-role
+  name: {{ template "exposecontroller.name" . }}-{{ .Values.exposeController.namespace }}-role
 rules:
   - apiGroups:
       - extensions
@@ -41,12 +41,12 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: RoleBinding
 metadata:
-  name: {{ template "name" . }}-{{ .Values.exposeController.namespace }}-role-binding
+  name: {{ template "exposecontroller.name" . }}-{{ .Values.exposeController.namespace }}-role-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ template "name" . }}-{{ .Values.exposeController.namespace }}-role
+  name: {{ template "exposecontroller.name" . }}-{{ .Values.exposeController.namespace }}-role
 subjects:
   - kind: ServiceAccount
-    name: {{ template "name" . }}
+    name: {{ template "exposecontroller.name" . }}
     namespace: {{ .Values.exposeController.namespace }}
