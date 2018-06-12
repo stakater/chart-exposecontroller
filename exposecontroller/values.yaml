@@ -3,7 +3,6 @@ exposeController:
     group: com.stakater.platform
     provider: stakater
     version: 2.3.56
-  namespace: tools
   domain: stackator.com
   # false by default
 #  http: true
