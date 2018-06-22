@@ -3,7 +3,10 @@ exposeController:
     group: com.stakater.platform
     provider: stakater
     version: 2.3.56
-  domain: stackator.com
+  domain: stackator.com  
+  # nodeSelector:
+  #   key: failure-domain.beta.kubernetes.io/zone
+  #   value: us-west-2a
   # false by default
 #  http: true
   probes:
