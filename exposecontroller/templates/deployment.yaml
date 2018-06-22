@@ -39,6 +39,10 @@ spec:
         - mountPath: /etc/exposecontroller
           name: config-volume
       serviceAccountName: {{ template "exposecontroller.name" . }}
+      {{- if .Values.exposeController.nodeSelector }} 
+      nodeSelector:
+        {{ .Values.exposeController.nodeSelector.key }}: {{ .Values.exposeController.nodeSelector.value }}
+      {{- end }}   
       volumes:
       - configMap:
           name: {{ template "exposecontroller.name" . }}
