@@ -27,13 +27,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         image: "{{ .Values.exposeController.image.name }}:{{ .Values.exposeController.image.tag }}"
-        imagePullPolicy: {{ .Values.exposeController.image.pullPolicy }}
-        readinessProbe:
-          exec:
-            command:
-            - cat
-            - /tmp/restarteveryday
-          initialDelaySeconds: {{ .Values.exposeController.probes.readiness.initialDelaySeconds }}
+        imagePullPolicy: {{ .Values.exposeController.image.pullPolicy }}        
         livenessProbe:
           exec:
             command:

@@ -10,8 +10,6 @@ exposeController:
   # false by default
 #  http: true
   probes:
-    readiness:
-      initialDelaySeconds: 86164
     liveness:
       initialDelaySeconds: 86164
   image:
