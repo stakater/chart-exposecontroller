@@ -38,6 +38,7 @@ spec:
         volumeMounts:
         - mountPath: /etc/exposecontroller
           name: config-volume
+      securityContext: {}
       serviceAccountName: {{ template "exposecontroller.name" . }}
       {{- if .Values.exposeController.nodeSelector }} 
       nodeSelector:
