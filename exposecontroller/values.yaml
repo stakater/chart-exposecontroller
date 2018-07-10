@@ -3,7 +3,8 @@ exposeController:
     group: com.stakater.platform
     provider: stakater
     version: 2.3.56
-  domain: stackator.com  
+  domain: stackator.com 
+  exposer: Ingress
   # nodeSelector:
   #   key: failure-domain.beta.kubernetes.io/zone
   #   value: us-west-2a
