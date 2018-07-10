@@ -8,7 +8,7 @@ metadata:
 data:
   config.yml: |
     domain: {{ .Values.exposeController.domain }}
-    exposer: Ingress
+    exposer: {{ .Values.exposeController.exposer }}
     {{- if .Values.exposeController.urltemplate }}
     urltemplate: "{{ .Values.exposeController.urltemplate }}"
     {{- end }}
