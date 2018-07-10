@@ -4,6 +4,11 @@ kind: Role
 metadata:
   name: {{ template "exposecontroller.name" . }}-{{ .Release.Namespace }}-role
 rules:
+  {{- if .Values.exposeController.isOpenShift }}
+  - apiGroups: [route.openshift.io]
+    resources: [routes]
+    verbs: [create, get, list, watch, update, delete]
+  {{- end }}
   - apiGroups:
       - extensions
     resources:

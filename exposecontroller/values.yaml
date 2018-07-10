@@ -5,6 +5,7 @@ exposeController:
     version: 2.3.56
   domain: stackator.com 
   exposer: Ingress
+  isOpenShift: false
   # nodeSelector:
   #   key: failure-domain.beta.kubernetes.io/zone
   #   value: us-west-2a
