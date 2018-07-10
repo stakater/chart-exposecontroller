@@ -8,6 +8,9 @@ rules:
   - apiGroups: [route.openshift.io]
     resources: [routes]
     verbs: [create, get, list, watch, update, delete]
+  - apiGroups: ['']
+    resources: [nodes]
+    verbs: [list, watch]
   {{- end }}
   - apiGroups:
       - extensions
