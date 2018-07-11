@@ -5,12 +5,19 @@ metadata:
   name: {{ template "exposecontroller.name" . }}-{{ .Release.Namespace }}-role
 rules:
   {{- if .Values.exposeController.isOpenShift }}
-  - apiGroups: [route.openshift.io]
-    resources: [routes]
-    verbs: [create, get, list, watch, update, delete]
-  - apiGroups: ['']
-    resources: [nodes]
-    verbs: [list, watch]
+  - apiGroups:
+      - ""
+      - "route.openshift.io"
+    resources:
+      - routes
+    verbs:
+      - get
+      - list
+      - watch
+      - patch
+      - create
+      - update
+      - delete
   {{- end }}
   - apiGroups:
       - extensions
