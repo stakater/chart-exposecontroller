@@ -4,8 +4,8 @@ kind: Role
 metadata:
   name: {{ template "exposecontroller.name" . }}-{{ .Release.Namespace }}-default-role
   labels:
-{{ include "kube-state-metrics.labels.stakater" . | indent 4 }}
-{{ include "kube-state-metrics.labels.chart" . | indent 4 }}
+{{ include "exposecontroller.labels.stakater" . | indent 4 }}
+{{ include "exposecontroller.labels.chart" . | indent 4 }}
   namespace: default
 rules:
   - apiGroups:
@@ -22,8 +22,8 @@ kind: RoleBinding
 metadata:
   name: {{ template "exposecontroller.name" . }}-{{ .Release.Namespace }}-default-role-binding
   labels:
-{{ include "kube-state-metrics.labels.stakater" . | indent 4 }}
-{{ include "kube-state-metrics.labels.chart" . | indent 4 }}
+{{ include "exposecontroller.labels.stakater" . | indent 4 }}
+{{ include "exposecontroller.labels.chart" . | indent 4 }}
   namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io

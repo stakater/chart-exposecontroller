@@ -4,8 +4,8 @@ kind: Role
 metadata:
   name: {{ template "exposecontroller.name" . }}-{{ .Release.Namespace }}-role
   labels:
-{{ include "kube-state-metrics.labels.stakater" . | indent 4 }}
-{{ include "kube-state-metrics.labels.chart" . | indent 4 }}
+{{ include "exposecontroller.labels.stakater" . | indent 4 }}
+{{ include "exposecontroller.labels.chart" . | indent 4 }}
 rules:
   {{- if .Values.exposeController.isOpenShift }}
   - apiGroups:
@@ -61,8 +61,8 @@ kind: RoleBinding
 metadata:
   name: {{ template "exposecontroller.name" . }}-{{ .Release.Namespace }}-role-binding
   labels:
-{{ include "kube-state-metrics.labels.stakater" . | indent 4 }}
-{{ include "kube-state-metrics.labels.chart" . | indent 4 }}
+{{ include "exposecontroller.labels.stakater" . | indent 4 }}
+{{ include "exposecontroller.labels.chart" . | indent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
