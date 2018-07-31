@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    configmap.fabric8.io/update-on-change: {{ template "exposecontroller.name" . }}
+    configmap.reloader.stakater.com/reload: {{ template "exposecontroller.name" . }}
   labels:
 {{ include "exposecontroller.labels.stakater" . | indent 4 }}
 {{ include "exposecontroller.labels.chart" . | indent 4 }}
@@ -15,8 +15,6 @@ spec:
 {{ include "exposecontroller.labels.selector" . | indent 6 }}
   template:
     metadata:
-      annotations:
-        configmap.fabric8.io/update-on-change: {{ template "exposecontroller.name" . }}
       labels:
 {{ include "exposecontroller.labels.selector" . | indent 8 }}
     spec:
