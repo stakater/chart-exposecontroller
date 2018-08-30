@@ -9,7 +9,7 @@ metadata:
   name: {{ template "exposecontroller.name" . }}
 spec:
   replicas: 1
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 2  
   selector:
     matchLabels:
 {{ include "exposecontroller.labels.selector" . | indent 6 }}
@@ -26,6 +26,27 @@ spec:
               fieldPath: metadata.namespace
         image: "{{ .Values.exposeController.image.name }}:{{ .Values.exposeController.image.tag }}"
         imagePullPolicy: {{ .Values.exposeController.image.pullPolicy }}        
+        {{- with .Values.exposeController.resources }}
+        resources:
+          {{- with .requests }}
+          requests:
+            {{- with .memory }}
+            memory: {{ . }}
+            {{- end }}
+            {{- with .cpu }}
+            cpu: {{ . }}
+            {{- end }}
+          {{- end }}
+          {{- with .limits }}
+          limits:
+            {{- with .memory }}
+            memory: {{ . }}
+            {{- end }}
+            {{- with .cpu }}
+            cpu: {{ . }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
         livenessProbe:
           exec:
             command:
