@@ -11,6 +11,13 @@ exposeController:
   #   value: us-west-2a
   # false by default
 #  http: true
+  resources:
+    requests:
+      memory: 200Mi
+      cpu: 200m
+    limits:
+      memory: 400Mi
+      cpu: 400m
   probes:
     liveness:
       initialDelaySeconds: 86164
